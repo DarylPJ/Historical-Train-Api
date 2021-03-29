@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31112.23
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HistoricalTrainApi", "HistoricalTrainApi\HistoricalTrainApi.csproj", "{8CA53C2D-49EB-4982-93FB-5B00A232F898}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8CA53C2D-49EB-4982-93FB-5B00A232F898}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8CA53C2D-49EB-4982-93FB-5B00A232F898}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8CA53C2D-49EB-4982-93FB-5B00A232F898}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8CA53C2D-49EB-4982-93FB-5B00A232F898}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {DE22B8E9-A6F5-4214-A504-89C452CB0E9D}
+	EndGlobalSection
+EndGlobal
