@@ -9,7 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\HistoricalTrainApiModels\HistoricalTrainApiModels.csproj" />
+    <ProjectReference Include="..\HistoricalTrainApi.Models\HistoricalTrainApi.Models.csproj" />
   </ItemGroup>
 
 </Project>

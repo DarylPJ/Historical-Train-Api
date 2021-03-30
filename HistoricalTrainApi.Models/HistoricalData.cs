@@ -1,4 +1,4 @@
-﻿namespace HistoricalTrainApiModels
+﻿namespace HistoricalTrainApi.Models
 {
     public class HistoricalData
     {

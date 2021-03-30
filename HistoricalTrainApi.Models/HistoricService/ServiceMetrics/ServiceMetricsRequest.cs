@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
-namespace HistoricalTrainApiModels.HistoricService.ServiceMetrics
+namespace HistoricalTrainApi.Models.HistoricService.ServiceMetrics
 {
     public class ServiceMetricsRequest
     {

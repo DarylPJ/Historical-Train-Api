@@ -1,10 +1,10 @@
-﻿using HistoricalTrainApiModels;
+﻿using HistoricalTrainApi.Models;
 using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace HistoricalTrainApiRepositories
+namespace HistoricalTrainApi.Repositories
 {
     public interface IHistoricServiceRepository
     {

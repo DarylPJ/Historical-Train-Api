@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace HistoricalTrainApiModels
+namespace HistoricalTrainApi.Models
 {
     public class HistoricServiceUris
     {

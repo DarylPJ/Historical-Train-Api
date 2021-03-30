@@ -9,8 +9,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\HistoricalTrainApiModels\HistoricalTrainApiModels.csproj" />
-    <ProjectReference Include="..\HistoricalTrainApiRepositories\HistoricalTrainApiRepositories.csproj" />
+    <ProjectReference Include="..\HistoricalTrainApi.Models\HistoricalTrainApi.Models.csproj" />
+    <ProjectReference Include="..\HistoricalTrainApi.Repositories\HistoricalTrainApi.Repositories.csproj" />
   </ItemGroup>
 
 </Project>

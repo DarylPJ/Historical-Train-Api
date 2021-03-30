@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace HistoricalTrainApiModels.HistoricService.ServiceDetails
+namespace HistoricalTrainApi.Models.HistoricService.ServiceDetails
 {
     public class ServiceDetailsRequest
     {

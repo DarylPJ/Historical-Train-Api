@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System.Collections.Generic;
 
-namespace HistoricalTrainApiModels.HistoricService.ServiceDetails
+namespace HistoricalTrainApi.Models.HistoricService.ServiceDetails
 {
     public class ServiceAttributesDetails
     {

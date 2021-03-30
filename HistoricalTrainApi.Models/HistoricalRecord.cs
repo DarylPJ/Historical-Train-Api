@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace HistoricalTrainApiModels
+namespace HistoricalTrainApi.Models
 {
     public class HistoricalRecord
     {

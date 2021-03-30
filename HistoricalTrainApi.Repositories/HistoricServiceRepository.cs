@@ -1,6 +1,6 @@
-﻿using HistoricalTrainApiModels;
-using HistoricalTrainApiModels.HistoricService.ServiceDetails;
-using HistoricalTrainApiModels.HistoricService.ServiceMetrics;
+﻿using HistoricalTrainApi.Models;
+using HistoricalTrainApi.Models.HistoricService.ServiceDetails;
+using HistoricalTrainApi.Models.HistoricService.ServiceMetrics;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using System;
@@ -11,7 +11,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace HistoricalTrainApiRepositories
+namespace HistoricalTrainApi.Repositories
 {
     public class HistoricServiceRepository : IHistoricServiceRepository
     {

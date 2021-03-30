@@ -1,6 +1,6 @@
 ﻿using System.Runtime.Serialization;
 
-namespace HistoricalTrainApiModels.HistoricService.ServiceMetrics
+namespace HistoricalTrainApi.Models.HistoricService.ServiceMetrics
 {
     public enum Days
     {

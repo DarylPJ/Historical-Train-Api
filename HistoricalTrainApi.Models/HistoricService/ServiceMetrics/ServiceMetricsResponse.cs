@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System.Collections.Generic;
 
-namespace HistoricalTrainApiModels.HistoricService.ServiceMetrics
+namespace HistoricalTrainApi.Models.HistoricService.ServiceMetrics
 {
     public class ServiceMetricsResponse
     {

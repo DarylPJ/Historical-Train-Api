@@ -1,4 +1,4 @@
-﻿using HistoricalTrainApiRepositories;
+﻿using HistoricalTrainApi.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading;

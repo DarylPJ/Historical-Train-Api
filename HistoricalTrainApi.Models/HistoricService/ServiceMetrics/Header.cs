@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace HistoricalTrainApiModels.HistoricService.ServiceMetrics
+namespace HistoricalTrainApi.Models.HistoricService.ServiceMetrics
 {
     public class Header
     {
