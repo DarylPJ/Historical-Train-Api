@@ -1,8 +1,11 @@
 ﻿using HistoricalTrainApiModels;
+using HistoricalTrainApiModels.HistoricService.ServiceDetails;
 using HistoricalTrainApiModels.HistoricService.ServiceMetrics;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading;
@@ -25,17 +28,42 @@ namespace HistoricalTrainApiRepositories
             this.serviceUris = options ?? throw new ArgumentNullException(nameof(options));
         }
 
-        public Task<ServiceMetricsResponse> GetTrainTimes(
+        public async Task<IList<LocationDetail>> GetTrainTimes(
             DateTime startDate,
             DateTime endDate,
             string fromLocation,
             string toLocation,
             CancellationToken cancellationToken)
         {
-            return GetServiceMetricsAsync(startDate, endDate, fromLocation, toLocation, cancellationToken);
+            var serviceMetrics = await GetServiceMetricsAsync(startDate, endDate, fromLocation, toLocation, cancellationToken);
+            var rids = serviceMetrics.Services.SelectMany(i => i.ServiceAttributesMetrics.Rids);
+
+            var serviceDetails = new List<ServiceDetailsResponse>();
+            foreach (var rid in rids)
+            {
+                serviceDetails.Add(await GetServiceDetailsAsync(rid, cancellationToken));
+            }
+
+            var serviceDetailsForStations = serviceDetails.SelectMany(i => i.ServiceAttributesDetails.Locations)
+                .Where(i => string.Equals(i.Location, fromLocation) || string.Equals(i.Location, toLocation));
+
+            return serviceDetailsForStations.ToList();
         }
 
-        private async Task<ServiceMetricsResponse> GetServiceMetricsAsync(
+        private Task<ServiceDetailsResponse> GetServiceDetailsAsync(string rid, CancellationToken cancellationToken)
+        {
+            var request = new ServiceDetailsRequest
+            {
+                Rid = rid
+            };
+
+            return PostContent<ServiceDetailsRequest, ServiceDetailsResponse>(
+                request,
+                serviceUris.CurrentValue.ServiceDetails,
+                cancellationToken);
+        }
+
+        private Task<ServiceMetricsResponse> GetServiceMetricsAsync(
             DateTime startDate,
             DateTime endDate,
             string fromLocation,
@@ -59,14 +87,23 @@ namespace HistoricalTrainApiRepositories
                 ToDate = endDate.ToString("yyyy-MM-dd"),
                 Days = days
             };
-            var json = JsonConvert.SerializeObject(requestCotent);
-            var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+            return PostContent<ServiceMetricsRequest, ServiceMetricsResponse>(
+                requestCotent,
+                serviceUris.CurrentValue.ServiceMetrics,
+                cancellationToken);
+        }
+
+        private async Task<Y> PostContent<T, Y>(T content, Uri uri, CancellationToken cancellationToken)
+        {
+            var json = JsonConvert.SerializeObject(content);
+            var stringContent = new StringContent(json, Encoding.UTF8, "application/json");
 
             var client = clientFactory.CreateClient(DarwinClientName);
 
-            using var response = await client.PostAsync(serviceUris.CurrentValue.ServiceMetrics, content, cancellationToken);
+            using var response = await client.PostAsync(uri, stringContent, cancellationToken);
             var text = await response.Content.ReadAsStringAsync();
-            var metricsResponse = JsonConvert.DeserializeObject<ServiceMetricsResponse>(text);
+            var metricsResponse = JsonConvert.DeserializeObject<Y>(text);
 
             return metricsResponse;
         }

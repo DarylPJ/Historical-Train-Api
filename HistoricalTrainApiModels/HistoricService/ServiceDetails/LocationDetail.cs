@@ -2,10 +2,10 @@
 
 namespace HistoricalTrainApiModels.HistoricService.ServiceDetails
 {
-    public class Location
+    public class LocationDetail
     {
         [JsonProperty("Location")]
-        public string Station { get; set; }
+        public string Location { get; set; }
 
         [JsonProperty("gbtt_ptd")]
         public string TimetabledDeparture { get; set; }

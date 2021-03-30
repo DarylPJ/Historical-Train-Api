@@ -16,6 +16,6 @@ namespace HistoricalTrainApiModels.HistoricService.ServiceDetails
         public string Rid { get; set; }
 
         [JsonProperty("locations")]
-        public IList<Location> Locations { get; } = new List<Location>();
+        public IList<LocationDetail> Locations { get; } = new List<LocationDetail>();
     }
 }

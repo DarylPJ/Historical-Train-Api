@@ -1,5 +1,6 @@
-﻿using HistoricalTrainApiModels.HistoricService.ServiceMetrics;
+﻿using HistoricalTrainApiModels.HistoricService.ServiceDetails;
 using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -7,7 +8,7 @@ namespace HistoricalTrainApiRepositories
 {
     public interface IHistoricServiceRepository
     {
-        Task<ServiceMetricsResponse> GetTrainTimes(
+        Task<IList<LocationDetail>> GetTrainTimes(
             DateTime startDate,
             DateTime endDate,
             string fromLocation,
