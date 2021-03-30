@@ -19,19 +19,28 @@ namespace HistoricalTrainApi.Controllers
 
         [HttpGet]
         public async Task<IActionResult> GetDataAsync(
-            [FromQuery]string date,
+            [FromQuery]string startDate,
+            [FromQuery]string endDate,
             [FromQuery]string from,
             [FromQuery]string to,
             CancellationToken cancellationToken)
         {
-            if(!DateTime.TryParse(date, out var dateTime) || 
+            if(!DateTime.TryParse(startDate, out var startDateTime) ||
+                !DateTime.TryParse(endDate, out var endDateTime) ||
                 string.IsNullOrWhiteSpace(from) || 
-                string.IsNullOrWhiteSpace(to))
+                string.IsNullOrWhiteSpace(to) || 
+                startDateTime.Date != endDateTime.Date)
             {
                 return BadRequest();
             }
 
-            var results = await historicServiceRepository.GetTrainTimes(dateTime, from, to, cancellationToken);
+            var results = await historicServiceRepository.GetTrainTimes(
+                startDateTime,
+                endDateTime,
+                from,
+                to,
+                cancellationToken);
+
             return Ok(results);
         }
     }

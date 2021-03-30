@@ -7,6 +7,11 @@ namespace HistoricalTrainApiRepositories
 {
     public interface IHistoricServiceRepository
     {
-        Task<ServiceMetricsResponse> GetTrainTimes(DateTime date, string fromLocation, string toLocation, CancellationToken cancellationToken);
+        Task<ServiceMetricsResponse> GetTrainTimes(
+            DateTime startDate,
+            DateTime endDate,
+            string fromLocation,
+            string toLocation,
+            CancellationToken cancellationToken);
     }
 }

@@ -25,31 +25,38 @@ namespace HistoricalTrainApiRepositories
             this.serviceUris = options ?? throw new ArgumentNullException(nameof(options));
         }
 
-        public Task<ServiceMetricsResponse> GetTrainTimes(DateTime date, string fromLocation, string toLocation, CancellationToken cancellationToken)
+        public Task<ServiceMetricsResponse> GetTrainTimes(
+            DateTime startDate,
+            DateTime endDate,
+            string fromLocation,
+            string toLocation,
+            CancellationToken cancellationToken)
         {
-            return GetServiceMetricsAsync(date, fromLocation, toLocation, cancellationToken);
+            return GetServiceMetricsAsync(startDate, endDate, fromLocation, toLocation, cancellationToken);
         }
 
-        private async Task<ServiceMetricsResponse> GetServiceMetricsAsync(DateTime date, string fromLocation, string toLocation, CancellationToken cancellationToken)
+        private async Task<ServiceMetricsResponse> GetServiceMetricsAsync(
+            DateTime startDate,
+            DateTime endDate,
+            string fromLocation,
+            string toLocation,
+            CancellationToken cancellationToken)
         {
-            Days days = date.DayOfWeek switch
+            Days days = startDate.DayOfWeek switch
             {
                 DayOfWeek.Saturday => Days.Saturday,
                 DayOfWeek.Sunday => Days.Sunday,
                 _ => Days.Weekday
             };
 
-            var hour = GetTwoDigitValue(date.Hour);
-            var minute = GetTwoDigitValue(date.Minute);
-
             var requestCotent = new ServiceMetricsRequest
             {
                 FromLocation = fromLocation,
                 ToLocation = toLocation,
-                FromTime = $"{hour}{minute}",
-                ToTime = $"{hour}{GetTwoDigitValue(date.Minute + 1)}",
-                FromDate = date.ToString("yyyy-MM-dd"),
-                ToDate = date.ToString("yyyy-MM-dd"),
+                FromTime = $"{GetTwoDigitValue(startDate.Hour)}{GetTwoDigitValue(startDate.Minute)}",
+                ToTime = $"{GetTwoDigitValue(endDate.Hour)}{GetTwoDigitValue(endDate.Minute)}",
+                FromDate = startDate.ToString("yyyy-MM-dd"),
+                ToDate = endDate.ToString("yyyy-MM-dd"),
                 Days = days
             };
             var json = JsonConvert.SerializeObject(requestCotent);
