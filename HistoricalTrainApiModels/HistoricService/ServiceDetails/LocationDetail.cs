@@ -20,6 +20,15 @@ namespace HistoricalTrainApiModels.HistoricService.ServiceDetails
         public string ActualArrival { get; set; }
 
         [JsonProperty("late_canc_reason")]
-        public string Reason { get; set; }
+        public string DelayReason { get; set; }
+
+        public HistoricalData ToHistoricalData() => new HistoricalData
+        {
+            ActualArrival = ActualArrival,
+            ActualDeparture = ActualDeparture,
+            DelayReason = DelayReason,
+            TimetabledDeparture = TimetabledDeparture,
+            TimetabledArrival = TimetabledArrival
+        };
     }
 }

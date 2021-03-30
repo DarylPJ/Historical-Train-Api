@@ -28,26 +28,42 @@ namespace HistoricalTrainApiRepositories
             this.serviceUris = options ?? throw new ArgumentNullException(nameof(options));
         }
 
-        public async Task<IList<LocationDetail>> GetTrainTimes(
+        public async Task<IList<HistoricalRecord>> GetTrainTimes(
             DateTime startDate,
             DateTime endDate,
-            string fromLocation,
-            string toLocation,
+            string startLocation,
+            string endLocation,
             CancellationToken cancellationToken)
         {
-            var serviceMetrics = await GetServiceMetricsAsync(startDate, endDate, fromLocation, toLocation, cancellationToken);
-            var rids = serviceMetrics.Services.SelectMany(i => i.ServiceAttributesMetrics.Rids);
+            var serviceMetrics = await GetServiceMetricsAsync(startDate, endDate, startLocation, endLocation, cancellationToken);
 
-            var serviceDetails = new List<ServiceDetailsResponse>();
-            foreach (var rid in rids)
+           
+            var historicalRecords = new List<HistoricalRecord>();
+            foreach (var service in serviceMetrics.Services)
             {
-                serviceDetails.Add(await GetServiceDetailsAsync(rid, cancellationToken));
+                var rids = service.ServiceAttributesMetrics.Rids;
+
+                foreach (var rid in rids)
+                {
+                    var serviceDetails = await GetServiceDetailsAsync(rid, cancellationToken);
+                    var locations = serviceDetails.ServiceAttributesDetails.Locations;
+
+                    var startLocationData = locations.FirstOrDefault(i => i.Location == startLocation);
+                    var endLocationData = locations.FirstOrDefault(i => i.Location == endLocation);
+
+                    historicalRecords.Add(new HistoricalRecord
+                    {
+                        OriginLocation = service.ServiceAttributesMetrics.OriginLocation,
+                        DestinationLocation = service.ServiceAttributesMetrics.DestinationLocation,
+                        LocationData = 
+                        {
+                            [startLocation] = startLocationData.ToHistoricalData(),
+                            [endLocation] = endLocationData.ToHistoricalData()
+                        }
+                    });
+                }
             }
-
-            var serviceDetailsForStations = serviceDetails.SelectMany(i => i.ServiceAttributesDetails.Locations)
-                .Where(i => string.Equals(i.Location, fromLocation) || string.Equals(i.Location, toLocation));
-
-            return serviceDetailsForStations.ToList();
+            return historicalRecords;
         }
 
         private Task<ServiceDetailsResponse> GetServiceDetailsAsync(string rid, CancellationToken cancellationToken)
@@ -66,8 +82,8 @@ namespace HistoricalTrainApiRepositories
         private Task<ServiceMetricsResponse> GetServiceMetricsAsync(
             DateTime startDate,
             DateTime endDate,
-            string fromLocation,
-            string toLocation,
+            string startLocation,
+            string endLocation,
             CancellationToken cancellationToken)
         {
             Days days = startDate.DayOfWeek switch
@@ -79,8 +95,8 @@ namespace HistoricalTrainApiRepositories
 
             var requestCotent = new ServiceMetricsRequest
             {
-                FromLocation = fromLocation,
-                ToLocation = toLocation,
+                FromLocation = startLocation,
+                ToLocation = endLocation,
                 FromTime = $"{GetTwoDigitValue(startDate.Hour)}{GetTwoDigitValue(startDate.Minute)}",
                 ToTime = $"{GetTwoDigitValue(endDate.Hour)}{GetTwoDigitValue(endDate.Minute)}",
                 FromDate = startDate.ToString("yyyy-MM-dd"),
