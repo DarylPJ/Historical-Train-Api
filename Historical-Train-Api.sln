@@ -17,7 +17,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HistoricalTrainApi.Reposito
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HistoricalTrainApi.Repositories", "src\HistoricalTrainApi.Repositories\HistoricalTrainApi.Repositories.csproj", "{A69405A1-A633-46AD-BEEE-6AC84B255315}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HistoricalTrainApi.IntegrationTests", "HistoricalTrainApi.IntegrationTests\HistoricalTrainApi.IntegrationTests.csproj", "{5B3FF7B6-2171-4015-9E1F-B2F88910744D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HistoricalTrainApi.IntegrationTests", "tests\HistoricalTrainApi.IntegrationTests\HistoricalTrainApi.IntegrationTests.csproj", "{ECA6310C-C8D8-4EEE-8835-63BE3A83DC02}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,10 +45,10 @@ Global
 		{A69405A1-A633-46AD-BEEE-6AC84B255315}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A69405A1-A633-46AD-BEEE-6AC84B255315}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A69405A1-A633-46AD-BEEE-6AC84B255315}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5B3FF7B6-2171-4015-9E1F-B2F88910744D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5B3FF7B6-2171-4015-9E1F-B2F88910744D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5B3FF7B6-2171-4015-9E1F-B2F88910744D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5B3FF7B6-2171-4015-9E1F-B2F88910744D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ECA6310C-C8D8-4EEE-8835-63BE3A83DC02}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ECA6310C-C8D8-4EEE-8835-63BE3A83DC02}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ECA6310C-C8D8-4EEE-8835-63BE3A83DC02}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ECA6310C-C8D8-4EEE-8835-63BE3A83DC02}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -59,7 +59,7 @@ Global
 		{16A9C3FC-2B9D-4515-8F22-C13459714871} = {D895DB69-26B5-4D06-A536-FF9F198E5641}
 		{FED5DC42-EF0B-4C83-A619-E78B5F87F5F1} = {D895DB69-26B5-4D06-A536-FF9F198E5641}
 		{A69405A1-A633-46AD-BEEE-6AC84B255315} = {F4F794ED-C499-4962-8094-1F03A7231413}
-		{5B3FF7B6-2171-4015-9E1F-B2F88910744D} = {D895DB69-26B5-4D06-A536-FF9F198E5641}
+		{ECA6310C-C8D8-4EEE-8835-63BE3A83DC02} = {D895DB69-26B5-4D06-A536-FF9F198E5641}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {DE22B8E9-A6F5-4214-A504-89C452CB0E9D}
