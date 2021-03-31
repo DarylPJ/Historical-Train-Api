@@ -22,7 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\HistoricalTrainApi.Repositories\HistoricalTrainApi.Repositories.csproj" />
+    <ProjectReference Include="..\..\src\HistoricalTrainApi.Repositories\HistoricalTrainApi.Repositories.csproj" />
   </ItemGroup>
 
 </Project>

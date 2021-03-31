@@ -21,7 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\HistoricalTrainApi\HistoricalTrainApi.csproj" />
+    <ProjectReference Include="..\..\src\HistoricalTrainApi\HistoricalTrainApi.csproj" />
   </ItemGroup>
 
 </Project>
