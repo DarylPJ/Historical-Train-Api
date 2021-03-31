@@ -36,7 +36,6 @@ namespace HistoricalTrainApi
             services.AddHttpClient("darwin", c =>
             {
                 c.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", base64EncodedAuthenticationString);
-                c.Timeout = TimeSpan.FromMinutes(2);
             });
 
             services.AddOptions<HistoricServiceUris>()
