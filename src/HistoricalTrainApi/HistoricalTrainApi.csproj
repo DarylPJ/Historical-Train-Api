@@ -13,4 +13,10 @@
     <ProjectReference Include="..\HistoricalTrainApi.Repositories\HistoricalTrainApi.Repositories.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="StationCodes.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

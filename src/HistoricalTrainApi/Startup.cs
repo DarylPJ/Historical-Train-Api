@@ -42,6 +42,7 @@ namespace HistoricalTrainApi
             .Bind(Configuration.GetSection(nameof(HistoricServiceUris)));
 
             services.AddSingleton<IHistoricServiceRepository, HistoricServiceRepository>();
+            services.AddSingleton<IStationCodeRepository, StationCodeRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
