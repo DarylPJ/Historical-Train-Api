@@ -45,6 +45,38 @@ namespace HistoricalTrainApi.Tests.Controllers
         }
 
         [Fact]
+        public async Task HistoricServiceThrowsHistoricServiceException_ReturnsServiceUnavailable()
+        {
+            const string startDate = "2021/03/30 10:00";
+            const string endDate = "2021/03/30 11:00";
+            const string startLocation = "ABC";
+            const string endLocation = "DEF";
+
+            var historicalRecords = (IList<HistoricalRecord>)new List<HistoricalRecord>();
+
+            var mockHistoricServiceRepository = new Mock<IHistoricServiceRepository>();
+            mockHistoricServiceRepository
+                .Setup(i => i.GetTrainTimes(
+                    It.IsAny<DateTime>(),
+                    It.IsAny<DateTime>(),
+                    startLocation,
+                    endLocation,
+                    It.IsAny<CancellationToken>()))
+                .ThrowsAsync(new HistoricServiceException());
+
+            var historicalDataController = new HistoricalDataController(mockHistoricServiceRepository.Object);
+            var result = await historicalDataController.GetDataAsync(
+                startDate,
+                endDate,
+                startLocation,
+                endLocation,
+                CancellationToken.None);
+
+            var objectResult = Assert.IsType<ObjectResult>(result);
+            Assert.Equal(503, objectResult.StatusCode);
+        }
+
+        [Fact]
         public async Task GetData_WithValidParameters_ReturnsOk()
         {
             const string startDate = "2021/03/30 10:00";

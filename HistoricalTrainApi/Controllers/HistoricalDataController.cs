@@ -1,6 +1,8 @@
-﻿using HistoricalTrainApi.Repositories;
+﻿using HistoricalTrainApi.Models;
+using HistoricalTrainApi.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -34,12 +36,20 @@ namespace HistoricalTrainApi.Controllers
                 return BadRequest();
             }
 
-            var results = await historicServiceRepository.GetTrainTimes(
-                startDateTime,
-                endDateTime,
-                startLocation,
-                endLocation,
-                cancellationToken);
+            IList<HistoricalRecord> results;
+            try
+            {
+                results = await historicServiceRepository.GetTrainTimes(
+                    startDateTime,
+                    endDateTime,
+                    startLocation,
+                    endLocation,
+                    cancellationToken);
+            }
+            catch (HistoricServiceException)
+            {
+                return StatusCode(503, "Error with National Rail Darwin data feeds. Please try again later.");
+            }
 
             return Ok(results);
         }

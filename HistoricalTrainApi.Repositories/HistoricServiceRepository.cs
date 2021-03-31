@@ -36,7 +36,6 @@ namespace HistoricalTrainApi.Repositories
             CancellationToken cancellationToken)
         {
             var serviceMetrics = await GetServiceMetricsAsync(startDate, endDate, startLocation, endLocation, cancellationToken);
-
            
             var historicalRecords = new List<HistoricalRecord>();
             foreach (var service in serviceMetrics.Services)
@@ -48,8 +47,8 @@ namespace HistoricalTrainApi.Repositories
                     var serviceDetails = await GetServiceDetailsAsync(rid, cancellationToken);
                     var locations = serviceDetails.ServiceAttributesDetails.Locations;
 
-                    var startLocationData = locations.FirstOrDefault(i => i.Location == startLocation);
-                    var endLocationData = locations.FirstOrDefault(i => i.Location == endLocation);
+                    var startLocationData = locations.Single(i => i.Location == startLocation);
+                    var endLocationData = locations.Single(i => i.Location == endLocation);
 
                     historicalRecords.Add(new HistoricalRecord
                     {
@@ -118,6 +117,11 @@ namespace HistoricalTrainApi.Repositories
             var client = clientFactory.CreateClient(DarwinClientName);
 
             using var response = await client.PostAsync(uri, stringContent, cancellationToken);
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new HistoricServiceException();
+            }
+
             var text = await response.Content.ReadAsStringAsync();
             var metricsResponse = JsonConvert.DeserializeObject<Y>(text);
 
