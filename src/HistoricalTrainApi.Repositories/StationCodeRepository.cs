@@ -18,6 +18,14 @@ namespace HistoricalTrainApi.Repositories
             {
                 for (int i = 0; i < fieldCount; i+=2)
                 {
+                    var name = csv[i];
+                    var code = csv[i + 1];
+
+                    if (string.IsNullOrWhiteSpace(name) || string.IsNullOrWhiteSpace(code))
+                    {
+                        continue;
+                    }
+
                     stationCodes[csv[i]] = csv[i + 1];
                 }
             }
