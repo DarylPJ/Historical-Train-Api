@@ -26,7 +26,7 @@ namespace HistoricalTrainApi.Repositories
                         continue;
                     }
 
-                    stationCodes[csv[i]] = csv[i + 1];
+                    stationCodes[code] = name;
                 }
             }
         }
