@@ -21,17 +21,14 @@ namespace HistoricalTrainApi.Controllers
 
         [HttpGet]
         public async Task<IActionResult> GetDataAsync(
-            [FromQuery]string startDate,
-            [FromQuery]string endDate,
-            [FromQuery]string startLocation,
-            [FromQuery]string endLocation,
+            DateTime startDate,
+            DateTime endDate,
+            string startLocation,
+            string endLocation,
             CancellationToken cancellationToken)
         {
-            if(!DateTime.TryParse(startDate, out var startDateTime) ||
-                !DateTime.TryParse(endDate, out var endDateTime) ||
-                string.IsNullOrWhiteSpace(startLocation) || 
-                string.IsNullOrWhiteSpace(endLocation) || 
-                startDateTime.Date != endDateTime.Date)
+            if( string.IsNullOrWhiteSpace(startLocation) || 
+                string.IsNullOrWhiteSpace(endLocation))
             {
                 return BadRequest();
             }
@@ -40,8 +37,8 @@ namespace HistoricalTrainApi.Controllers
             try
             {
                 results = await historicServiceRepository.GetTrainTimes(
-                    startDateTime,
-                    endDateTime,
+                    startDate,
+                    endDate,
                     startLocation,
                     endLocation,
                     cancellationToken);

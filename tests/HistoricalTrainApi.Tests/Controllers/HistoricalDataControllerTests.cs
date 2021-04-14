@@ -14,17 +14,10 @@ namespace HistoricalTrainApi.Tests.Controllers
     public class HistoricalDataControllerTests
     {
         [Theory]
-        [InlineData(null, "2021/03/30 11:00", "ABC", "DEF")]
-        [InlineData(" ", "2021/03/30 11:00", "ABC", "DEF")]
-        [InlineData("2021/03/30 10:00", " ", "ABC", "DEF")]
-        [InlineData("2021/03/30 10:00", null, "ABC", "DEF")]
-        [InlineData("2021/03/30 10:00", "2021/ 03/30 11:00", null, "DEF")]
+        [InlineData("2021/03/30 10:00", "2021/03/30 11:00", null, "DEF")]
         [InlineData("2021/03/30 10:00", "2021/03/30 11:00", " ", "DEF")]
         [InlineData("2021/03/30 10:00", "2021/03/30 11:00", "ABC", null)]
         [InlineData("2021/03/30 10:00", "2021/03/30 11:00", "ABC", " ")]
-        [InlineData("2021/03/29 10:00", "2021/03/30 11:00", "ABC", "DEF")]
-        [InlineData("not a datetime", "2021/03/30 11:00", "ABC", "DEF")]
-        [InlineData("2021/03/30 10:00", "not a datetime", "ABC", "DEF")]
         public async Task GetData_WithInvalidParameters_ReturnsBadRequest(
             string startDate,
             string endDate,
@@ -35,8 +28,8 @@ namespace HistoricalTrainApi.Tests.Controllers
 
             var historicalDataController = new HistoricalDataController(historicServiceRepository);
             var result = await historicalDataController.GetDataAsync(
-                startDate,
-                endDate,
+                DateTime.Parse(startDate),
+                DateTime.Parse(endDate),
                 startLocation,
                 endLocation,
                 CancellationToken.None);
@@ -66,8 +59,8 @@ namespace HistoricalTrainApi.Tests.Controllers
 
             var historicalDataController = new HistoricalDataController(mockHistoricServiceRepository.Object);
             var result = await historicalDataController.GetDataAsync(
-                startDate,
-                endDate,
+                DateTime.Parse(startDate),
+                DateTime.Parse(endDate),
                 startLocation,
                 endLocation,
                 CancellationToken.None);
@@ -96,8 +89,8 @@ namespace HistoricalTrainApi.Tests.Controllers
 
             var historicalDataController = new HistoricalDataController(historicServiceRepository);
             var result = await historicalDataController.GetDataAsync(
-                startDate,
-                endDate,
+                DateTime.Parse(startDate),
+                DateTime.Parse(endDate),
                 startLocation,
                 endLocation,
                 CancellationToken.None);
