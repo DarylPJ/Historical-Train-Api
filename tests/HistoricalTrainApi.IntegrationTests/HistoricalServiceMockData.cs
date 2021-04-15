@@ -161,18 +161,18 @@ namespace HistoricalTrainApi.IntegrationTests
                 {
                     ["CFL"] = new HistoricalData
                     {
-                        TimetabledDeparture = "0719",
-                        TimetabledArrival = "0719",
-                        ActualDeparture = "0718",
-                        ActualArrival = "0717",
+                        TimetabledDeparture = "07:19",
+                        TimetabledArrival = "07:19",
+                        ActualDeparture = "07:18",
+                        ActualArrival = "07:17",
                         DelayReason = ""
                     },
                     ["LDS"] = new HistoricalData
                     {
                         TimetabledDeparture = "",
-                        TimetabledArrival = "0744",
+                        TimetabledArrival = "07:44",
                         ActualDeparture = "",
-                        ActualArrival = "0743",
+                        ActualArrival = "07:43",
                         DelayReason = ""
                     }
                 }
