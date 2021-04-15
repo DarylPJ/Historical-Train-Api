@@ -24,11 +24,21 @@ namespace HistoricalTrainApi.Models.HistoricService.ServiceDetails
 
         public HistoricalData ToHistoricalData() => new HistoricalData
         {
-            ActualArrival = ActualArrival,
-            ActualDeparture = ActualDeparture,
+            ActualArrival = FormatTime(ActualArrival),
+            ActualDeparture = FormatTime(ActualDeparture),
             DelayReason = DelayReason,
-            TimetabledDeparture = TimetabledDeparture,
-            TimetabledArrival = TimetabledArrival
+            TimetabledDeparture = FormatTime(TimetabledDeparture),
+            TimetabledArrival = FormatTime(TimetabledArrival)
         };
+
+        private string FormatTime(string time)
+        {
+            if (!string.IsNullOrWhiteSpace(time))
+            {
+                return $"{time.Substring(0, 2)}:{time.Substring(2, 2)}";
+            }
+
+            return time;
+        }
     }
 }
