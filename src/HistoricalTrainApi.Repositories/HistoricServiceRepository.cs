@@ -47,8 +47,8 @@ namespace HistoricalTrainApi.Repositories
                     var serviceDetails = await GetServiceDetailsAsync(rid, cancellationToken);
                     var locations = serviceDetails.ServiceAttributesDetails.Locations;
 
-                    var startLocationData = locations.Single(i => i.Location == startLocation);
-                    var endLocationData = locations.Single(i => i.Location == endLocation);
+                    var startLocationData = locations.First(i => i.Location == startLocation);
+                    var endLocationData = locations.First(i => i.Location == endLocation);
 
                     historicalRecords.Add(new HistoricalRecord
                     {
